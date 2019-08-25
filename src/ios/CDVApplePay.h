@@ -15,6 +15,7 @@ typedef void (^ARAuthorizationBlock)(PKPaymentAuthorizationStatus);
 
 @property (nonatomic, strong) NSString* paymentCallbackId;
 
+- (void)setupStripe:(CDVInvokedUrlCommand *)command;
 - (void)makePaymentRequest:(CDVInvokedUrlCommand*)command;
 - (void)canMakePayments:(CDVInvokedUrlCommand*)command;
 - (void)completeLastTransaction:(CDVInvokedUrlCommand*)command;
