@@ -10,6 +10,18 @@ var executeCallback = function(callback, message) {
 
 var ApplePay = {
 
+    setupStripe: function(merchantId, publishableKey, successCallback, errorCallback) {
+        return new Promise(function(resolve, reject) {
+            exec(function(message) {
+                executeCallback(successCallback, message);
+                resolve(message);
+            }, function(message) {
+                executeCallback(errorCallback, message);
+                reject(message);
+            }, 'ApplePay', 'setupStripe', [merchantId, publishableKey]);
+        });
+    },
+    
     /**
      * Determines if the current device supports Apple Pay and has a supported card installed.
      * @param {Function} [successCallback] - Optional success callback, recieves message object.
