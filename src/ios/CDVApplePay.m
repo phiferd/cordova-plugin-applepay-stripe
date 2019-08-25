@@ -17,20 +17,17 @@
     // Set the capabilities that your merchant supports
     // Adyen for example, only supports the 3DS one.
     merchantCapabilities = PKMerchantCapability3DS;// PKMerchantCapabilityEMV;
+}
 
-    // Stripe Publishable Key
-#ifndef NDEBUG
-    NSString * stripePublishableKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"StripeTestPublishableKey"];
-#else
-    NSString * stripePublishableKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"StripeLivePublishableKey"];
-#endif
+- (void)setupStripe:(CDVInvokedUrlCommand *)command {
+    NSString *stripePublishableKey = [command argumentAtIndex:0];
+    NSString *appleMerchantIdentifier = [command argumentAtIndex:1];
+
     NSLog(@"Stripe stripePublishableKey == %@", stripePublishableKey);
-    NSString * appleMerchantIdentifier = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppleMerchantIdentifier"];
     NSLog(@"ApplePay appleMerchantIdentifier == %@", appleMerchantIdentifier);
+
     [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:stripePublishableKey];
     [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:appleMerchantIdentifier];
-
-
 }
 
 - (NSMutableDictionary*)applyABRecordBillingAddress:(ABRecordRef)address forDictionary:(NSMutableDictionary*)response {
