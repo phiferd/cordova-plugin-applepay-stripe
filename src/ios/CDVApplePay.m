@@ -395,9 +395,9 @@
     // reset any lingering callbacks, incase the previous payment failed.
     self.paymentAuthorizationBlock = nil;
 
-    NSString * appleMerchantIdentifier = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppleMerchantIdentifier"];
-    // Old version
-    // PKPaymentRequest *request = [PKPaymentRequest new];
+    // Setup the payment with the merchantId from the shared config (initialized in setupStripe)
+    STPPaymentConfiguration *sharedConfiguration = [STPPaymentConfiguration sharedConfiguration];
+    NSString * appleMerchantIdentifier = sharedConfiguration.appleMerchantIdentifier;
     PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:appleMerchantIdentifier];
 
     // Different version of iOS support different networks, (ie Discover card is iOS9+; not part of my project, so ignoring).
