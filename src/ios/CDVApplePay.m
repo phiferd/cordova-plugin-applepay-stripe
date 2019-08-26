@@ -20,15 +20,15 @@
 }
 
 - (void)setupStripe:(CDVInvokedUrlCommand *)command {
-    NSString *stripePublishableKey = [command argumentAtIndex:0];
-    NSString *appleMerchantIdentifier = [command argumentAtIndex:1];
+    NSString *appleMerchantIdentifier = [command argumentAtIndex:0];
+    NSString *stripePublishableKey = [command argumentAtIndex:1];
 
-    NSLog(@"Stripe stripePublishableKey == %@", stripePublishableKey);
     NSLog(@"ApplePay appleMerchantIdentifier == %@", appleMerchantIdentifier);
+    NSLog(@"Stripe stripePublishableKey == %@", stripePublishableKey);
 
     [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:stripePublishableKey];
     [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:appleMerchantIdentifier];
-    
+
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @"Configuration complete"];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
